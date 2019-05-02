@@ -1,0 +1,30 @@
+apiVersion: skaffold/v1beta2
+kind: Config
+build:
+  artifacts:
+  - image: changeme
+    context: .
+    docker: {}
+  tagPolicy:
+    envTemplate:
+      template: '{{.DOCKER_REGISTRY}}/eliasrdrgz/service-mesh-meetup:{{.VERSION}}'
+  local: {}
+deploy:
+  kubectl: {}
+profiles:
+- name: dev
+  build:
+    artifacts:
+    - docker: {}
+    tagPolicy:
+      envTemplate:
+        template: '{{.DOCKER_REGISTRY}}/eliasrdrgz/service-mesh-meetup:{{.DIGEST_HEX}}'
+    local: {}
+  deploy:
+    helm:
+      releases:
+      - name: service-mesh-meetup
+        chartPath: charts/service-mesh-meetup
+        setValueTemplates:
+          image.repository: '{{.DOCKER_REGISTRY}}/eliasrdrgz/service-mesh-meetup'
+          image.tag: '{{.DIGEST_HEX}}'

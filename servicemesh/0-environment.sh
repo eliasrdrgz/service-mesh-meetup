@@ -2,13 +2,13 @@
 
 # Minishift
 export MINISHIFT_PROFILE="servicemesh"
-export MINISHIFT_MEMORY="12GB"
+export MINISHIFT_MEMORY="6GB"
 export MINISHIFT_CPUS="2"
 export MINISHIFT_VM_DRIVER="kvm" # xhyve | virtualbox | kvm
 export MINISHIFT_DISK_SIZE="40g"
 
 # Maistra
-export MAISTRA_VERSION=0.6.0
+export MAISTRA_VERSION=0.7.0
 export MAISTRA_TYPE=product # community | product
 
 # Istio
